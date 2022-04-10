@@ -1,21 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import React, {useState} from 'react';
+import { StatusBar} from 'react-native';
+import Login from './screens/Login';
+import RegisterUser from './screens/RegisterUser';
+import LoggedInApp from './screens/LoggedInApp';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+    <StatusBar barStyle="dark-content" />
+    <NavigationContainer>
+      
+      <Stack.Navigator initialRouteName='Login'
+      options={{headerMode: 'float'}}>
+        <Stack.Screen 
+          name='Login'
+          component={Login}
+          options ={{
+            headerShown: false}}>
+        </Stack.Screen>
+        <Stack.Screen 
+          name='RegisterUser'
+          component={RegisterUser}
+          options ={{
+            headerShown: false}}>
+        </Stack.Screen>
+        <Stack.Screen 
+          name='LoggedInApp'
+          component={LoggedInApp}
+          options ={{
+            headerShown: false}}>
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
